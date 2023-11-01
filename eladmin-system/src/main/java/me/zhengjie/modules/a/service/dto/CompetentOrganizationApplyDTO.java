@@ -1,16 +1,12 @@
 package me.zhengjie.modules.a.service.dto;
 
-import javax.persistence.Column;
 import javax.validation.constraints.NotNull;
 
 /**
  * @author Rain
  * @date 2023/10/31 13:22
  */
-public class RegistrationApplyDTO {
-
-    @NotNull
-    private Integer type;
+public class CompetentOrganizationApplyDTO {
 
     /**
      * 行政等级
@@ -33,35 +29,27 @@ public class RegistrationApplyDTO {
      * 机构名称
      */
     @NotNull
-    private String associationName;
+    private String name;
     /**
      * 机构备注 简介
      */
-    private String associationDescription;
+    private String description;
     /**
      * 机构电话
      */
-    private String associationPhone;
+    private String phone;
     /**
      * 机构邮箱地址
      */
-    private String associationEmail;
-    /**
-     * 机构社会信用代码
-     */
-    private String associationSocialCreditCode;
+    private String email;
     /**
      * 机构传真
      */
-    private String associationFax;
+    private String fax;
     /**
      * 机构地址
      */
-    private String associationAddress;
-    /**
-     * 机构法人
-     */
-    private String associationCorporation;
+    private String address;
 
 
     /**

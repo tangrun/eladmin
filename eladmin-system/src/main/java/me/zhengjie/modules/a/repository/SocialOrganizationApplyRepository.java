@@ -1,6 +1,6 @@
 package me.zhengjie.modules.a.repository;
 
-import me.zhengjie.modules.a.domain.RegistrationApply;
+import me.zhengjie.modules.a.domain.SocialOrganizationApply;
 import org.springframework.data.jpa.repository.support.JpaRepositoryImplementation;
 import org.springframework.stereotype.Repository;
 
@@ -9,5 +9,5 @@ import org.springframework.stereotype.Repository;
  * @date 2023/10/31 13:14
  */
 @Repository
-public interface RegistrationRepository extends JpaRepositoryImplementation<RegistrationApply,Long> {
+public interface SocialOrganizationApplyRepository extends JpaRepositoryImplementation<SocialOrganizationApply,Long> {
 }

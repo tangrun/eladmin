@@ -1,0 +1,71 @@
+package me.zhengjie.modules.a.domain;
+
+import lombok.Getter;
+import lombok.Setter;
+import me.zhengjie.base.BaseEntity;
+import me.zhengjie.domain.LocalStorage;
+
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+
+/**
+ * 主管机构注册申请
+ *
+ * @author Rain
+ * @date 2023/10/30 17:06
+ */
+@Entity
+@Getter
+@Setter
+@Table(name = "reg_social_apply")
+public class SocialOrganizationApply  extends BaseEntity {
+
+    @Id
+    @Column(name = "id")
+    @NotNull(groups = BaseEntity.Update.class)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    /**
+     * 机构名称
+     */
+    @Column(name = "name")
+    private String name;
+    /**
+     * 机构备注 简介
+     */
+    @Column(name = "description")
+    private String description;
+    /**
+     * 机构社会信用代码
+     */
+    @Column(name = "credit_code")
+    private String creditCode;
+
+
+    /**
+     * 管理员名字
+     */
+    @Column(name = "manager_name")
+    @NotNull
+    private String managerName;
+    /**
+     * 管理员电话
+     */
+    @Column(name = "manager_phone")
+    @NotNull
+    private String managerPhone;
+    /**
+     * 管理员邮箱
+     */
+    @Column(name = "manager_email")
+    @NotNull
+    private String managerEmail;
+
+    /**
+     * 资质扫描件
+     */
+    @OneToOne()
+    @JoinColumn(name = "business_license_id", referencedColumnName = "storage_id")
+    private LocalStorage businessLicenseCopy;
+}
