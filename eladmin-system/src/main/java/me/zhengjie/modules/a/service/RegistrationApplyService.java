@@ -34,7 +34,7 @@ public class RegistrationApplyService {
 
     public void socialApply(SocialOrganizationApplyDTO request) {
         SocialOrganizationApply apply = new SocialOrganizationApply();
-        BeanUtil.copyProperties(request,apply);
+        BeanUtil.copyProperties(request,apply,"id");
 
         if (request.getBusinessLicenseCopy() != null) {
             LocalStorage localStorage = localStorageService.create(null, request.getBusinessLicenseCopy());
@@ -46,7 +46,7 @@ public class RegistrationApplyService {
 
     public void expertApply(ExpertApplyDTO request) {
         ExpertApply apply = new ExpertApply();
-        BeanUtil.copyProperties(request,apply);
+        BeanUtil.copyProperties(request,apply,"id");
 
         if (request.getIdentityFrontCopy() != null) {
             LocalStorage localStorage = localStorageService.create(null, request.getIdentityFrontCopy());
@@ -70,7 +70,7 @@ public class RegistrationApplyService {
 
     public void competentApply(CompetentOrganizationApplyDTO request) {
         CompetentOrganizationApply apply = new CompetentOrganizationApply();
-        BeanUtil.copyProperties(request,apply);
+        BeanUtil.copyProperties(request,apply,"id");
         competentOrganizationApplyRepository.save(apply);
     }
 

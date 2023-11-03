@@ -14,6 +14,9 @@ import java.io.File;
  */
 @Data
 public class ExpertApplyDTO {
+
+    private Long id;
+
     /**
      * 姓名
      */

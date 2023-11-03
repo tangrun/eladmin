@@ -1,5 +1,7 @@
 package me.zhengjie.modules.a.service.dto;
 
+import org.springframework.data.domain.Pageable;
+
 import javax.validation.constraints.NotNull;
 
 /**
@@ -7,6 +9,8 @@ import javax.validation.constraints.NotNull;
  * @date 2023/10/31 13:22
  */
 public class CompetentOrganizationApplyDTO {
+
+    private Long id;
 
     /**
      * 行政等级

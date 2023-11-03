@@ -13,6 +13,8 @@ import java.io.File;
 @Data
 public class SocialOrganizationApplyDTO {
 
+    private Long id;
+
     /**
      * 机构名称
      */
