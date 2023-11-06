@@ -1,6 +1,6 @@
-package me.zhengjie.modules.a.repository;
+package me.zhengjie.modules.registration.repository;
 
-import me.zhengjie.modules.a.domain.SocialOrganizationApply;
+import me.zhengjie.modules.registration.domain.SocialOrganizationApply;
 import org.springframework.data.jpa.repository.support.JpaRepositoryImplementation;
 import org.springframework.stereotype.Repository;
 

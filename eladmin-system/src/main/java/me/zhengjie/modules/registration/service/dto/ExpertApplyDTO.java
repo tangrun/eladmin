@@ -1,11 +1,10 @@
-package me.zhengjie.modules.a.service.dto;
+package me.zhengjie.modules.registration.service.dto;
 
 import lombok.Data;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import java.io.File;
 
 /**
  * 专家注册申请

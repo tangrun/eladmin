@@ -1,4 +1,4 @@
-package me.zhengjie.modules.a.domain;
+package me.zhengjie.modules.registration.domain;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -68,4 +68,10 @@ public class SocialOrganizationApply  extends BaseEntity {
     @OneToOne()
     @JoinColumn(name = "business_license_id", referencedColumnName = "storage_id")
     private LocalStorage businessLicenseCopy;
+
+    @Column(name = "state")
+    private Integer state;
+
+    @Column(name = "remark")
+    private String remark;
 }

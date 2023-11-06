@@ -1,14 +1,14 @@
-package me.zhengjie.modules.a.rest;
+package me.zhengjie.modules.registration.rest;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import me.zhengjie.annotation.rest.AnonymousPostMapping;
-import me.zhengjie.modules.a.service.RegistrationApplyService;
-import me.zhengjie.modules.a.service.dto.CompetentOrganizationApplyDTO;
-import me.zhengjie.modules.a.service.dto.ExpertApplyDTO;
-import me.zhengjie.modules.a.service.dto.SocialOrganizationApplyDTO;
+import me.zhengjie.modules.registration.service.RegistrationApplyService;
+import me.zhengjie.modules.registration.service.dto.*;
+import me.zhengjie.utils.PageResult;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,7 +32,7 @@ public class RegistrationApplyController {
 
     @ApiOperation("【专家】注册申请")
     @AnonymousPostMapping(value = "/expert/apply")
-    public ResponseEntity<Object> expertApply(@Valid ExpertApplyDTO request){
+    public ResponseEntity<Void> expertApply(@Valid ExpertApplyDTO request){
         registrationService.expertApply(request);
         return ResponseEntity.ok(null);
     }
@@ -41,15 +41,22 @@ public class RegistrationApplyController {
     @ApiOperation("【专家】注册申请列表")
     @PreAuthorize("@el.check('registration:list')")
     @GetMapping(value = "/expert/list")
-    public ResponseEntity<Object> expertList(Pageable pageable){
-        registrationService.expertList(pageable);
-        return null;
+    public ResponseEntity<PageResult<ExpertApplyDTO>> expertList(ExpertApplyQueryCriteria criteria, Pageable pageable){
+        return new ResponseEntity<>(registrationService.expertList(criteria, pageable),HttpStatus.OK);
     }
+
+    @ApiOperation("【专家】注册申请审核")
+    @PreAuthorize("@el.check('registration:handle')")
+    @GetMapping(value = "/handle")
+    public ResponseEntity<PageResult<ExpertApplyDTO>> expertHandle(ExpertApplyQueryCriteria criteria, Pageable pageable){
+        return new ResponseEntity<>(registrationService.expertList(criteria, pageable),HttpStatus.OK);
+    }
+
 
 
     @ApiOperation("【主管机构】注册申请")
     @AnonymousPostMapping(value = "/competent/apply")
-    public ResponseEntity<Object> competentApply(@Valid CompetentOrganizationApplyDTO request){
+    public ResponseEntity<Void> competentApply(@Valid CompetentOrganizationApplyDTO request){
         registrationService.competentApply(request);
         return ResponseEntity.ok(null);
     }
@@ -58,14 +65,13 @@ public class RegistrationApplyController {
     @ApiOperation("【主管机构】注册申请列表")
     @PreAuthorize("@el.check('registration:list')")
     @GetMapping(value = "/competent/list")
-    public ResponseEntity<Object> competentList(Pageable pageable){
-
-        return null;
+    public ResponseEntity<PageResult<CompetentOrganizationApplyDTO>> competentList(CompetentOrganizationQueryCriteria criteria, Pageable pageable){
+        return new ResponseEntity<>(registrationService.competentList(criteria,pageable), HttpStatus.OK);
     }
 
     @ApiOperation("【社会组织】注册申请")
     @AnonymousPostMapping(value = "/social/apply")
-    public ResponseEntity<Object> socialApply(@Valid SocialOrganizationApplyDTO request){
+    public ResponseEntity<Void> socialApply(@Valid SocialOrganizationApplyDTO request){
         registrationService.socialApply(request);
         return ResponseEntity.ok(null);
     }
@@ -74,9 +80,8 @@ public class RegistrationApplyController {
     @ApiOperation("【社会组织】注册申请列表")
     @PreAuthorize("@el.check('registration:list')")
     @GetMapping(value = "/social/list")
-    public ResponseEntity<Object> socialList(Pageable pageable){
-
-        return null;
+    public ResponseEntity<PageResult<SocialOrganizationApplyDTO>> socialList(SocialOrganizationQueryCriteria criteria,Pageable pageable){
+        return new ResponseEntity<>(registrationService.socialList(criteria,pageable), HttpStatus.OK);
     }
 
 

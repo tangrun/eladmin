@@ -1,6 +1,4 @@
-package me.zhengjie.modules.a.service.dto;
-
-import org.springframework.data.domain.Pageable;
+package me.zhengjie.modules.registration.service.dto;
 
 import javax.validation.constraints.NotNull;
 

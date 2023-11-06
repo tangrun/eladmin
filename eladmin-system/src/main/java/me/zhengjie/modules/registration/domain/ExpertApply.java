@@ -1,4 +1,4 @@
-package me.zhengjie.modules.a.domain;
+package me.zhengjie.modules.registration.domain;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -6,9 +6,6 @@ import me.zhengjie.base.BaseEntity;
 import me.zhengjie.domain.LocalStorage;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import java.io.File;
 
 /**
  * 专家注册申请
@@ -96,5 +93,11 @@ public class ExpertApply  extends BaseEntity {
     @OneToOne()
     @JoinColumn(name = "qualification_id",referencedColumnName = "storage_id")
     private LocalStorage qualificationCopy;
+
+    @Column(name = "state")
+    private Integer state;
+
+    @Column(name = "remark")
+    private String remark;
 
 }

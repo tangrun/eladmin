@@ -1,11 +1,10 @@
-package me.zhengjie.modules.a.domain;
+package me.zhengjie.modules.registration.domain;
 
 import lombok.Getter;
 import lombok.Setter;
 import me.zhengjie.base.BaseEntity;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 
 /**
  * 主管机构注册申请
@@ -99,4 +98,10 @@ public class CompetentOrganizationApply extends BaseEntity {
     @Column(name = "manager_email")
     private String managerEmail;
 
+
+    @Column(name = "state")
+    private Integer state;
+
+    @Column(name = "remark")
+    private String remark;
 }
