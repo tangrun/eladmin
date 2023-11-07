@@ -1,16 +1,16 @@
-package me.zhengjie.modules.registration.service.dto;
+package me.zhengjie.modules.registration.service.vo;
 
-import lombok.Data;
-
+import javax.persistence.Column;
 import javax.validation.constraints.NotNull;
 
 /**
  * @author Rain
- * @date 2023/10/31 13:22
+ * @date 2023/11/7 9:17
  */
-@Data
-public class CompetentOrganizationApplyDTO {
+public class CompetentOrganizationApplyVO {
 
+
+    private Long id;
 
     /**
      * 行政等级
@@ -21,7 +21,6 @@ public class CompetentOrganizationApplyDTO {
      * 5 街道
      * 6 社区
      */
-    @NotNull
     private Integer administrativeLevel;
     private String province;
     private String city;
@@ -32,7 +31,6 @@ public class CompetentOrganizationApplyDTO {
     /**
      * 机构名称
      */
-    @NotNull
     private String name;
     /**
      * 机构备注 简介
@@ -59,17 +57,26 @@ public class CompetentOrganizationApplyDTO {
     /**
      * 管理员名字
      */
-    @NotNull
     private String managerName;
     /**
      * 管理员电话
      */
-    @NotNull
     private String managerPhone;
     /**
      * 管理员邮箱
      */
-    @NotNull
+
     private String managerEmail;
+
+    /**
+     * 0 提交
+     * 1 通过
+     * 2 拒绝
+     */
+    private Integer state;
+    /**
+     * 审核备注
+     */
+    private String remark;
 
 }

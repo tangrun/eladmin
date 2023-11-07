@@ -1,6 +1,8 @@
 package me.zhengjie.modules.registration.repository;
 
 import me.zhengjie.modules.registration.domain.SocialOrganizationApply;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.jpa.repository.support.JpaRepositoryImplementation;
 import org.springframework.stereotype.Repository;
 
@@ -10,4 +12,8 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface SocialOrganizationApplyRepository extends JpaRepositoryImplementation<SocialOrganizationApply,Long> {
+
+    @Modifying
+    @Query(value = " update SocialOrganizationApply set state = ?, remark = ? where id = ?")
+    void updateStateAndRemark(Integer state,String remark, Long id);
 }

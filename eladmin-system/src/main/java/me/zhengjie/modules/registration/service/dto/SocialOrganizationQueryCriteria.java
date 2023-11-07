@@ -17,4 +17,7 @@ public class SocialOrganizationQueryCriteria {
 
     @Query(type = Query.Type.BETWEEN)
     private List<Timestamp> createTime;
+
+    @Query
+    private Integer state;
 }

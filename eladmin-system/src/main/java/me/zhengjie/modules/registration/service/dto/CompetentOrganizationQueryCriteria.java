@@ -17,4 +17,7 @@ public class CompetentOrganizationQueryCriteria {
 
     @Query(type = Query.Type.BETWEEN)
     private List<Timestamp> createTime;
+
+    @Query
+    private Integer state;
 }
