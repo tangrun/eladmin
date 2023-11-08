@@ -27,6 +27,28 @@ public class SocialOrganizationApply  extends BaseEntity {
     private Long id;
 
     /**
+     * 行政等级
+     * 1 国家
+     * 2 省
+     * 3 市
+     * 4 县
+     * 5 街道
+     * 6 社区
+     */
+    @Column(name = "administrative_level")
+    private Integer administrativeLevel;
+    @Column(name = "province")
+    private String province;
+    @Column(name = "city")
+    private String city;
+    @Column(name = "county")
+    private String county;
+    @Column(name = "street")
+    private String street;
+    @Column(name = "community")
+    private String community;
+
+    /**
      * 机构名称
      */
     @Column(name = "name")

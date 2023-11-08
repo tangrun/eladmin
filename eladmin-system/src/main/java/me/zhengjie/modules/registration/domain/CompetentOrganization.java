@@ -14,8 +14,8 @@ import javax.persistence.*;
 @Entity
 @Getter
 @Setter
-@Table(name = "reg_competent_apply")
-public class CompetentOrganizationApply extends BaseEntity {
+@Table(name = "sys_user_competent")
+public class CompetentOrganization extends BaseEntity {
 
     @Id
     @Column(name = "id")
@@ -91,10 +91,4 @@ public class CompetentOrganizationApply extends BaseEntity {
     @Column(name = "manager_email")
     private String managerEmail;
 
-
-    @Column(name = "state")
-    private Integer state;
-
-    @Column(name = "remark")
-    private String remark;
 }

@@ -3,24 +3,29 @@ package me.zhengjie.modules.registration.domain;
 import lombok.Getter;
 import lombok.Setter;
 import me.zhengjie.base.BaseEntity;
+import me.zhengjie.domain.LocalStorage;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 /**
  * 主管机构注册申请
+ *
  * @author Rain
  * @date 2023/10/30 17:06
  */
 @Entity
 @Getter
 @Setter
-@Table(name = "reg_competent_apply")
-public class CompetentOrganizationApply extends BaseEntity {
+@Table(name = "sys_user_social")
+public class SocialOrganization extends BaseEntity {
 
     @Id
     @Column(name = "id")
+    @NotNull(groups = Update.class)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
 
     /**
      * 行政等级
@@ -44,6 +49,7 @@ public class CompetentOrganizationApply extends BaseEntity {
     @Column(name = "community")
     private String community;
 
+
     /**
      * 机构名称
      */
@@ -55,46 +61,35 @@ public class CompetentOrganizationApply extends BaseEntity {
     @Column(name = "description")
     private String description;
     /**
-     * 机构电话
+     * 机构社会信用代码
      */
-    @Column(name = "phone")
-    private String phone;
-    /**
-     * 机构邮箱地址
-     */
-    @Column(name = "email")
-    private String email;
-    /**
-     * 机构传真
-     */
-    @Column(name = "fax")
-    private String fax;
-    /**
-     * 机构地址
-     */
-    @Column(name = "address")
-    private String address;
+    @Column(name = "credit_code")
+    private String creditCode;
+
 
     /**
      * 管理员名字
      */
     @Column(name = "manager_name")
+    @NotNull
     private String managerName;
     /**
      * 管理员电话
      */
     @Column(name = "manager_phone")
+    @NotNull
     private String managerPhone;
     /**
      * 管理员邮箱
      */
     @Column(name = "manager_email")
+    @NotNull
     private String managerEmail;
 
-
-    @Column(name = "state")
-    private Integer state;
-
-    @Column(name = "remark")
-    private String remark;
+    /**
+     * 资质扫描件
+     */
+    @OneToOne()
+    @JoinColumn(name = "business_license_id", referencedColumnName = "storage_id")
+    private LocalStorage businessLicenseCopy;
 }
