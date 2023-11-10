@@ -185,5 +185,6 @@ public class RegistrationApplyService {
             roleRepository.saveAndFlush(role);
         }
         user.setRoles(Collections.singleton(role));
+        userRepository.save(user);
     }
 }
