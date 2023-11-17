@@ -17,7 +17,7 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Getter
 @Setter
-@Table(name = "reg_social_apply")
+@Table(name = "sys_user_social_apply")
 public class SocialOrganizationApply  extends BaseEntity {
 
     @Id

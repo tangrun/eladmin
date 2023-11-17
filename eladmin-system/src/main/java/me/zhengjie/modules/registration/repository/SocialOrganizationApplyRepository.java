@@ -14,6 +14,6 @@ import org.springframework.stereotype.Repository;
 public interface SocialOrganizationApplyRepository extends JpaRepositoryImplementation<SocialOrganizationApply,Long> {
 
     @Modifying
-    @Query(value = " update SocialOrganizationApply set state = ?, remark = ? where id = ?")
+    @Query(value = " update SocialOrganizationApply set state = :state, remark = :remark where id = :id")
     void updateStateAndRemark(Integer state,String remark, Long id);
 }

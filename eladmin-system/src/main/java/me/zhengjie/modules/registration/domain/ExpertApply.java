@@ -15,7 +15,7 @@ import javax.persistence.*;
 @Entity
 @Getter
 @Setter
-@Table(name = "reg_expert_apply")
+@Table(name = "sys_user_expert_apply")
 public class ExpertApply  extends BaseEntity {
 
     @Id

@@ -13,6 +13,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface CompetentOrganizationApplyRepository extends JpaRepositoryImplementation<CompetentOrganizationApply,Long> {
     @Modifying
-    @Query(value = " update CompetentOrganizationApply set state = ?, remark = ? where id = ?")
+    @Query(value = " update CompetentOrganizationApply set state = :state, remark = :remark where id = :id")
     void updateStateAndRemark(Integer state,String remark, Long id);
 }

@@ -14,6 +14,6 @@ import org.springframework.stereotype.Repository;
 public interface ExpertApplyRepository extends JpaRepositoryImplementation<ExpertApply,Long> {
 
     @Modifying
-    @Query(value = " update ExpertApply set state = ?, remark = ? where id = ?")
+    @Query(value = " update ExpertApply set state = :state, remark = :remark where id = :id")
     void updateStateAndRemark(Integer state,String remark, Long id);
 }
