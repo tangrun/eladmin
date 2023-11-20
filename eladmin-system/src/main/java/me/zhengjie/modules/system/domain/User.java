@@ -109,17 +109,17 @@ public class User extends BaseEntity implements Serializable {
     @ApiModelProperty(value = "最后修改密码的时间", hidden = true)
     private Date pwdResetTime;
 
-    @Column(name = "type")
+    @Column(name = "user_type")
     @ApiModelProperty(value = "账号类型 1主管单位 2组织机构 3评审专家", hidden = true)
-    private Integer type;
+    private Integer userType;
 
     @OneToOne
-    @JoinColumn(name = "competent_id")
+    @JoinColumn(name = "competent_organ_id")
     @ApiModelProperty(value = "主管单位")
     private CompetentOrganization competentOrganization;
 
     @OneToOne
-    @JoinColumn(name = "social_id")
+    @JoinColumn(name = "social_organ_id")
     @ApiModelProperty(value = "组织机构")
     private SocialOrganization socialOrganization;
 

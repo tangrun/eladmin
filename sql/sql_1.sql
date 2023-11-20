@@ -1,3 +1,8 @@
+ALTER TABLE sys_user ADD COLUMN user_type INT ( 5 ) DEFAULT NULL COMMENT '用户类型',
+ADD COLUMN competent_organ_id BIGINT ( 20 ) DEFAULT NULL COMMENT '主管单位',
+ADD COLUMN social_organ_id BIGINT ( 20 ) DEFAULT NULL COMMENT '组织机构',
+ADD COLUMN expert_id BIGINT ( 20 ) DEFAULT NULL COMMENT '评审专家';
+
 DROP TABLE IF EXISTS `sys_user_competent_apply`;
 CREATE TABLE `sys_user_competent_apply`
 (
@@ -19,6 +24,10 @@ CREATE TABLE `sys_user_competent_apply`
     `manager_email`        varchar(50)  DEFAULT NULL COMMENT '管理员邮箱',
     `state`                int(5) DEFAULT NULL COMMENT '审核状态',
     `remark`               varchar(255) DEFAULT NULL COMMENT '审核说明',
+    `create_by` varchar(255) DEFAULT NULL COMMENT '创建者',
+    `update_by` varchar(255) DEFAULT NULL COMMENT '更新者',
+    `create_time` datetime DEFAULT NULL COMMENT '创建日期',
+    `update_time` datetime DEFAULT NULL COMMENT '更新时间',
     PRIMARY KEY (`id`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=196 ROW_FORMAT=COMPACT COMMENT='主管机构注册申请';
 
@@ -41,6 +50,10 @@ CREATE TABLE `sys_user_competent`
     `manager_name`         varchar(50)  DEFAULT NULL COMMENT '管理员名字',
     `manager_phone`        varchar(50)  DEFAULT NULL COMMENT '管理员电话',
     `manager_email`        varchar(50)  DEFAULT NULL COMMENT '管理员邮箱',
+    `create_by` varchar(255) DEFAULT NULL COMMENT '创建者',
+    `update_by` varchar(255) DEFAULT NULL COMMENT '更新者',
+    `create_time` datetime DEFAULT NULL COMMENT '创建日期',
+    `update_time` datetime DEFAULT NULL COMMENT '更新时间',
     PRIMARY KEY (`id`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=196 ROW_FORMAT=COMPACT COMMENT='主管机构';
 
@@ -65,6 +78,10 @@ CREATE TABLE `sys_user_expert_apply`
     `qualification_id`    bigint(20) DEFAULT NULL COMMENT '资质扫描件',
     `state`               int(5) DEFAULT NULL COMMENT '审核状态',
     `remark`              varchar(255) DEFAULT NULL COMMENT '审核说明',
+    `create_by` varchar(255) DEFAULT NULL COMMENT '创建者',
+    `update_by` varchar(255) DEFAULT NULL COMMENT '更新者',
+    `create_time` datetime DEFAULT NULL COMMENT '创建日期',
+    `update_time` datetime DEFAULT NULL COMMENT '更新时间',
     PRIMARY KEY (`id`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=196 ROW_FORMAT=COMPACT COMMENT='评审专家注册申请';
 
@@ -85,6 +102,10 @@ CREATE TABLE `sys_user_expert`
     `identity_front_id`   bigint(20) DEFAULT NULL COMMENT '身份证复印件正面',
     `identity_back_id`    bigint(20) DEFAULT NULL COMMENT '身份证复印件背面',
     `qualification_id`    bigint(20) DEFAULT NULL COMMENT '资质扫描件',
+    `create_by` varchar(255) DEFAULT NULL COMMENT '创建者',
+    `update_by` varchar(255) DEFAULT NULL COMMENT '更新者',
+    `create_time` datetime DEFAULT NULL COMMENT '创建日期',
+    `update_time` datetime DEFAULT NULL COMMENT '更新时间',
     PRIMARY KEY (`id`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=196 ROW_FORMAT=COMPACT COMMENT='评审专家';
 
@@ -109,6 +130,10 @@ CREATE TABLE `sys_user_social_apply`
     `business_license_id`  bigint(20) DEFAULT NULL COMMENT '资质扫描件',
     `state`                int(5) DEFAULT NULL COMMENT '审核状态',
     `remark`               varchar(255) DEFAULT NULL COMMENT '审核说明',
+    `create_by` varchar(255) DEFAULT NULL COMMENT '创建者',
+    `update_by` varchar(255) DEFAULT NULL COMMENT '更新者',
+    `create_time` datetime DEFAULT NULL COMMENT '创建日期',
+    `update_time` datetime DEFAULT NULL COMMENT '更新时间',
     PRIMARY KEY (`id`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=196 ROW_FORMAT=COMPACT COMMENT='社会组织注册申请';
 
@@ -129,6 +154,10 @@ CREATE TABLE `sys_user_social`
     `manager_phone`        varchar(20)  DEFAULT NULL COMMENT '管理员电话',
     `manager_email`        varchar(50)  DEFAULT NULL COMMENT '管理员邮箱',
     `business_license_id`  bigint(20) DEFAULT NULL COMMENT '资质扫描件',
+    `create_by` varchar(255) DEFAULT NULL COMMENT '创建者',
+    `update_by` varchar(255) DEFAULT NULL COMMENT '更新者',
+    `create_time` datetime DEFAULT NULL COMMENT '创建日期',
+    `update_time` datetime DEFAULT NULL COMMENT '更新时间',
     PRIMARY KEY (`id`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=196 ROW_FORMAT=COMPACT COMMENT='社会组织';
 

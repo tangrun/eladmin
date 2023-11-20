@@ -84,6 +84,9 @@ public class DeptController {
             }
             deptSet.addAll(depts);
         }
+        {
+            // 其他机构修改成员信息时 修改部门没有数据
+        }
         return new ResponseEntity<>(deptService.buildTree(new ArrayList<>(deptSet)),HttpStatus.OK);
     }
 

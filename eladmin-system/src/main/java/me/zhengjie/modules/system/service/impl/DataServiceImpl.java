@@ -64,6 +64,8 @@ public class DataServiceImpl implements DataService {
                 case CUSTOMIZE:
                     deptIds.addAll(getCustomize(deptIds, role));
                     break;
+                case CUSTOMIZE_PARENT_LEVEL:
+
                 default:
                     return new ArrayList<>();
             }

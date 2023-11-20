@@ -16,6 +16,8 @@
 package me.zhengjie.modules.system.rest;
 
 import cn.hutool.core.collection.CollectionUtil;
+import cn.hutool.core.util.IdUtil;
+import cn.hutool.core.util.StrUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
@@ -111,6 +113,9 @@ public class UserController {
         checkLevel(resources);
         // 默认密码 123456
         resources.setPassword(passwordEncoder.encode("123456"));
+        if (StrUtil.isBlank(resources.getUsername())){
+            resources.setUsername(IdUtil.nanoId());
+        }
         userService.create(resources);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }

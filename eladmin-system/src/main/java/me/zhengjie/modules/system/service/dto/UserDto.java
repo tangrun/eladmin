@@ -16,9 +16,17 @@
 package me.zhengjie.modules.system.service.dto;
 
 import com.alibaba.fastjson.annotation.JSONField;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.Setter;
 import me.zhengjie.base.BaseDTO;
+import me.zhengjie.modules.registration.domain.CompetentOrganization;
+import me.zhengjie.modules.registration.domain.Expert;
+import me.zhengjie.modules.registration.domain.SocialOrganization;
+
+import javax.persistence.Column;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
@@ -64,4 +72,13 @@ public class UserDto extends BaseDTO implements Serializable {
     private Boolean isAdmin = false;
 
     private Date pwdResetTime;
+
+    private Integer userType;
+
+    private CompetentOrganization competentOrganization;
+
+    private SocialOrganization socialOrganization;
+
+    private Expert expert;
+
 }

@@ -57,15 +57,14 @@ public class RegistrationApplyController {
         return new ResponseEntity<>(null,HttpStatus.OK);
     }
 
-
+    //region 主管机构
 
     @ApiOperation("【主管机构】注册申请")
     @AnonymousPostMapping(value = "/competent/apply")
-    public ResponseEntity<Void> competentApply(@Valid CompetentOrganizationApplyDTO request){
+    public ResponseEntity<Void> competentApply( CompetentOrganizationApplyDTO request){
         registrationService.competentApply(request);
         return ResponseEntity.ok(null);
     }
-
 
     @ApiOperation("【主管机构】注册申请列表")
     @PreAuthorize("@el.check('registration:list')")
@@ -73,6 +72,8 @@ public class RegistrationApplyController {
     public ResponseEntity<PageResult<CompetentOrganizationApplyVO>> competentList(CompetentOrganizationQueryCriteria criteria, Pageable pageable){
         return new ResponseEntity<>(registrationService.competentList(criteria,pageable), HttpStatus.OK);
     }
+
+    //endregion
 
     @ApiOperation("【社会组织】注册申请")
     @AnonymousPostMapping(value = "/social/apply")
