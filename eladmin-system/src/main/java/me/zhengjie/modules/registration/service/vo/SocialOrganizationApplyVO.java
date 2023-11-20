@@ -5,6 +5,7 @@ import me.zhengjie.service.dto.LocalStorageDto;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.constraints.NotNull;
+import java.sql.Timestamp;
 
 /**
  * @author Rain
@@ -64,4 +65,12 @@ public class SocialOrganizationApplyVO {
      * 审核备注
      */
     private String remark;
+
+    private String createBy;
+
+    private String updateBy;
+
+    private Timestamp createTime;
+
+    private Timestamp updateTime;
 }

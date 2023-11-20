@@ -6,6 +6,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.sql.Timestamp;
 
 /**
  * 专家注册申请
@@ -94,4 +95,11 @@ public class ExpertApplyVO {
      */
     private String remark;
 
+    private String createBy;
+
+    private String updateBy;
+
+    private Timestamp createTime;
+
+    private Timestamp updateTime;
 }
