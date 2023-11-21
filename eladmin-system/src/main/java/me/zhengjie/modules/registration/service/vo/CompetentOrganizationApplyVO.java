@@ -1,16 +1,18 @@
 package me.zhengjie.modules.registration.service.vo;
 
 import lombok.Data;
+import me.zhengjie.base.BaseDTO;
 
 import javax.persistence.Column;
 import javax.validation.constraints.NotNull;
+import java.sql.Timestamp;
 
 /**
  * @author Rain
  * @date 2023/11/7 9:17
  */
 @Data
-public class CompetentOrganizationApplyVO {
+public class CompetentOrganizationApplyVO extends BaseDTO {
 
 
     private Long id;
@@ -82,4 +84,11 @@ public class CompetentOrganizationApplyVO {
      */
     private String remark;
 
+    private String createBy;
+
+    private String updateBy;
+
+    private Timestamp createTime;
+
+    private Timestamp updateTime;
 }
