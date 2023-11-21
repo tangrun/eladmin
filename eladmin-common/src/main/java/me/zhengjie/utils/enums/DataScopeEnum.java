@@ -36,8 +36,7 @@ public enum DataScopeEnum {
     THIS_LEVEL("本级", "自己部门的数据权限"),
 
     /* 自定义的数据权限 */
-    CUSTOMIZE("自定义", "自定义的数据权限"),
-    CUSTOMIZE_PARENT_LEVEL("自定义父级", "指定父级下所有的数据权限");
+    CUSTOMIZE("自定义", "自定义的数据权限");
 
     private final String value;
     private final String description;

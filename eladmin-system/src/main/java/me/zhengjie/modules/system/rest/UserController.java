@@ -111,6 +111,7 @@ public class UserController {
     @PreAuthorize("@el.check('user:add')")
     public ResponseEntity<Object> createUser(@Validated @RequestBody User resources){
         checkLevel(resources);
+        checkDeptScope(resources.getDept().getId());
         // 默认密码 123456
         resources.setPassword(passwordEncoder.encode("123456"));
         if (StrUtil.isBlank(resources.getUsername())){
@@ -126,6 +127,7 @@ public class UserController {
     @PreAuthorize("@el.check('user:edit')")
     public ResponseEntity<Object> updateUser(@Validated(User.Update.class) @RequestBody User resources) throws Exception {
         checkLevel(resources);
+        checkDeptScope(resources.getDept().getId());
         userService.update(resources);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
@@ -152,6 +154,8 @@ public class UserController {
             if (currentLevel > optLevel) {
                 throw new BadRequestException("角色权限不足，不能删除：" + userService.findById(id).getUsername());
             }
+            UserDto userDto = userService.findById(id);
+            checkDeptScope(userDto.getDept().getId());
         }
         userService.delete(ids);
         return new ResponseEntity<>(HttpStatus.OK);
@@ -199,6 +203,13 @@ public class UserController {
         verificationCodeService.validated(CodeEnum.EMAIL_RESET_EMAIL_CODE.getKey() + user.getEmail(), code);
         userService.updateEmail(userDto.getUsername(),user.getEmail());
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    private void checkDeptScope(Long deptId) {
+        List<Long> list = SecurityUtils.getCurrentUserDataScope();
+        if (!list.isEmpty() && !list.contains(deptId)){
+            throw new BadRequestException("角色权限不足");
+        }
     }
 
     /**
