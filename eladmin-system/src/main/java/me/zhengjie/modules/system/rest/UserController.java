@@ -22,6 +22,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import me.zhengjie.annotation.Log;
+import me.zhengjie.modules.system.service.dto.DeptDto;
 import me.zhengjie.utils.PageResult;
 import me.zhengjie.config.RsaProperties;
 import me.zhengjie.modules.system.domain.Dept;
@@ -75,6 +76,20 @@ public class UserController {
     @PreAuthorize("@el.check('user:list')")
     public void exportUser(HttpServletResponse response, UserQueryCriteria criteria) throws IOException {
         userService.download(userService.queryAll(criteria), response);
+    }
+
+    @ApiOperation("查询顶级部门下的用户")
+    @GetMapping("deptUsers")
+    @PreAuthorize("@el.check('user:deptList','projectPlan:add')")
+    public ResponseEntity<PageResult<UserDto>> queryDeptUser(UserQueryCriteria criteria){
+        UserDto userDto = userService.findById(SecurityUtils.getCurrentUserId());
+        DeptDto deptDto = deptService.findById(userDto.getDept().getId());
+        while (deptDto.getPid() != null){
+            deptDto = deptService.findById(deptDto.getPid());
+        }
+        criteria.getDeptIds().clear();
+        criteria.getDeptIds().add(deptDto.getId());
+        return new ResponseEntity<>(userService.queryAll(criteria,Pageable.unpaged()),HttpStatus.OK);
     }
 
     @ApiOperation("查询用户")
