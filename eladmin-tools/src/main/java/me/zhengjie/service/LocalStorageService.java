@@ -53,6 +53,8 @@ public interface LocalStorageService {
      */
     LocalStorageDto findById(Long id);
 
+    List<LocalStorage> createAll( List<MultipartFile> list);
+
     /**
      * 上传
      * @param name 文件名称

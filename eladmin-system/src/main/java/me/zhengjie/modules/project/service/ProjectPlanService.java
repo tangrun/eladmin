@@ -16,6 +16,7 @@
 package me.zhengjie.modules.project.service;
 
 import me.zhengjie.modules.project.domain.ProjectPlan;
+import me.zhengjie.modules.project.service.dto.ProjectPlanCreateForm;
 import me.zhengjie.modules.project.service.dto.ProjectPlanDto;
 import me.zhengjie.modules.project.service.dto.ProjectPlanQueryCriteria;
 import org.springframework.data.domain.Pageable;
@@ -59,7 +60,7 @@ public interface ProjectPlanService {
     * 创建
     * @param resources /
     */
-    void create(ProjectPlan resources);
+    void create(ProjectPlanCreateForm resources);
 
     /**
     * 编辑

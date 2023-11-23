@@ -49,7 +49,7 @@ public class ProjectPlan extends BaseEntity implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "`plan_id`")
     @ApiModelProperty(value = "计划ID")
-    @Null(groups = Create.class)
+    @NotNull(groups = Update.class)
     private Long planId;
 
     @OneToOne()
@@ -57,27 +57,21 @@ public class ProjectPlan extends BaseEntity implements Serializable {
     @ApiModelProperty(value = "上级项目")
     private ProjectPlan parentId;
 
-    @OneToOne()
-    @JoinColumn(name = "plan_status_id",referencedColumnName = "dict_id")
+    @Column(name = "plan_status")
     @ApiModelProperty(value = "项目状态：0、储备；1、立项")
-    private Dict planStatus;
+    private String planStatus;
 
     @Column(name = "`plan_name`")
     @ApiModelProperty(value = "项目名称")
-    @NotBlank(groups = Create.class)
     private String planName;
 
-    @OneToOne()
-    @JoinColumn(name = "category_id",referencedColumnName = "dict_id")
+    @Column(name = "category")
     @ApiModelProperty(value = "项目类别")
-    @NotNull(groups = Create.class)
-    private Dict category;
+    private String category;
 
-    @OneToOne()
-    @JoinColumn(name = "source_fund_id",referencedColumnName = "dict_id")
+    @Column(name = "source_funds")
     @ApiModelProperty(value = "资金来源：专项资金、配套资金、支持资金")
-    @NotNull(groups = Create.class)
-    private Dict sourceFund;
+    private String sourceFunds;
 
     @Column(name = "`overview`")
     @ApiModelProperty(value = "项目概述")
@@ -94,7 +88,6 @@ public class ProjectPlan extends BaseEntity implements Serializable {
     @OneToOne()
     @JoinColumn(name = "leader_id",referencedColumnName = "user_id")
     @ApiModelProperty(value = "项目负责人")
-    @NotNull(groups = Create.class)
     private User leader;
 
     @ManyToMany()
@@ -109,12 +102,10 @@ public class ProjectPlan extends BaseEntity implements Serializable {
 
     @Column(name = "`start_time`")
     @ApiModelProperty(value = "启动时间")
-    @NotNull(groups = Create.class)
     private Timestamp startTime;
 
     @Column(name = "`end_time`")
     @ApiModelProperty(value = "结束时间")
-    @NotNull(groups = Create.class)
     private Timestamp endTime;
 
     @Column(name = "`contacts`")

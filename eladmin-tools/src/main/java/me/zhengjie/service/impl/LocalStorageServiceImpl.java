@@ -63,10 +63,45 @@ public class LocalStorageServiceImpl implements LocalStorageService {
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public LocalStorageDto findById(Long id){
         LocalStorage localStorage = localStorageRepository.findById(id).orElseGet(LocalStorage::new);
         ValidationUtil.isNull(localStorage.getId(),"LocalStorage","id",id);
         return localStorageMapper.toDto(localStorage);
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public List<LocalStorage> createAll( List<MultipartFile> list){
+        List<LocalStorage> objects = new ArrayList<>();
+        List<File> uploadFile = new ArrayList<>();
+        try {
+            for (MultipartFile multipartFile : list) {
+                FileUtil.checkSize(properties.getMaxSize(), multipartFile.getSize());
+                String suffix = FileUtil.getExtensionName(multipartFile.getOriginalFilename());
+                String type = FileUtil.getFileType(suffix);
+                File file = FileUtil.upload(multipartFile, properties.getPath().getPath() + type +  File.separator);
+                if(ObjectUtil.isNull(file)){
+                    throw new BadRequestException("上传失败");
+                }
+                uploadFile.add(file);
+                LocalStorage localStorage = new LocalStorage(
+                        file.getName(),
+                        FileUtil.getFileNameNoEx(multipartFile.getOriginalFilename()),
+                        suffix,
+                        file.getPath(),
+                        type,
+                        FileUtil.getSize(multipartFile.getSize())
+                );
+                objects.add(localStorageRepository.save(localStorage));
+            }
+        }catch (Exception e){
+            for (File file : uploadFile) {
+                FileUtil.del(file);
+            }
+            throw e;
+        }
+        return objects;
     }
 
     @Override

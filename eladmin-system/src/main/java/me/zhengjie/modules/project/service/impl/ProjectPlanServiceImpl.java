@@ -15,7 +15,12 @@
 */
 package me.zhengjie.modules.project.service.impl;
 
+import cn.hutool.core.bean.BeanUtil;
+import cn.hutool.core.bean.copier.CopyOptions;
+import cn.hutool.core.util.ObjectUtil;
 import me.zhengjie.modules.project.domain.ProjectPlan;
+import me.zhengjie.modules.project.service.dto.ProjectPlanCreateForm;
+import me.zhengjie.service.LocalStorageService;
 import me.zhengjie.utils.ValidationUtil;
 import me.zhengjie.utils.FileUtil;
 import lombok.RequiredArgsConstructor;
@@ -30,13 +35,13 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import me.zhengjie.utils.PageUtil;
 import me.zhengjie.utils.QueryHelp;
-import java.util.List;
-import java.util.Map;
+
+import java.util.*;
 import java.io.IOException;
 import javax.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
+
 import me.zhengjie.utils.PageResult;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
 * @website https://eladmin.vip
@@ -49,7 +54,8 @@ import me.zhengjie.utils.PageResult;
 public class ProjectPlanServiceImpl implements ProjectPlanService {
 
     private final ProjectPlanRepository projectPlanRepository;
-    private final ProjectPlanMapper projectPlanMapper;
+    private final ProjectPlanMapper   projectPlanMapper;
+    private final LocalStorageService localStorageService;
 
     @Override
     public PageResult<ProjectPlanDto> queryAll(ProjectPlanQueryCriteria criteria, Pageable pageable){
@@ -72,8 +78,12 @@ public class ProjectPlanServiceImpl implements ProjectPlanService {
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void create(ProjectPlan resources) {
-        projectPlanRepository.save(resources);
+    public void create(ProjectPlanCreateForm resources) {
+        ProjectPlan plan = new ProjectPlan();
+        BeanUtil.copyProperties(resources,plan, CopyOptions.create().ignoreError());
+        plan.setProposals(new HashSet<>(localStorageService.createAll(resources.getProposals())));
+        plan.setContracts(new HashSet<>(localStorageService.createAll(resources.getContracts())));
+        projectPlanRepository.save(plan);
     }
 
     @Override
@@ -100,8 +110,8 @@ public class ProjectPlanServiceImpl implements ProjectPlanService {
             map.put("上级项目", projectPlan.getParentId());
             map.put("项目状态", projectPlan.getPlanStatus());
             map.put("项目名称", projectPlan.getPlanName());
-            map.put("项目类别", projectPlan.getCategoryId());
-            map.put("资金来源", projectPlan.getSource());
+            map.put("项目类别", projectPlan.getCategory());
+            map.put("资金来源", projectPlan.getSourceFund());
             map.put("项目概述", projectPlan.getOverview());
             map.put("项目备注", projectPlan.getRemark());
             map.put("项目公告", projectPlan.getNotice());

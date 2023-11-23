@@ -16,13 +16,14 @@
 package me.zhengjie.modules.project.service.dto;
 
 import lombok.Data;
-import me.zhengjie.modules.system.domain.Dict;
-import me.zhengjie.modules.system.service.dto.DictDto;
-import me.zhengjie.modules.system.service.dto.DictSmallDto;
+import me.zhengjie.base.BaseDTO;
+import me.zhengjie.modules.system.service.dto.UserSmallDto;
 import me.zhengjie.service.dto.LocalStorageDto;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -34,18 +35,23 @@ import java.util.Set;
 @Data
 public class ProjectPlanCreateForm implements Serializable {
 
+    /** 计划ID */
+    private Long planId;
 
     /** 上级项目 */
     private Long parentId;
+
+    /** 项目状态：0、储备；1、立项 */
+    private String planStatus;
 
     /** 项目名称 */
     private String planName;
 
     /** 项目类别 */
-    private DictSmallDto categoryId;
+    private String category;
 
     /** 资金来源：专项资金、配套资金、支持资金 */
-    private DictSmallDto source;
+    private String sourceFunds;
 
     /** 项目概述 */
     private String overview;
@@ -56,20 +62,18 @@ public class ProjectPlanCreateForm implements Serializable {
     /** 项目公告 */
     private String notice;
 
-    /** 创建人 */
-    private String createBy;
-
-    /** 创建时间 */
-    private Timestamp createTime;
-
     /** 项目负责人 */
-    private Integer leaderId;
+    private Long leader;
 
     /** 项目书 */
-    private Set<LocalStorageDto> proposals;
+    private List<MultipartFile> proposals;
+    /** 项目书  */
+    private List<Long> proposalsOld;
 
     /** 项目合同 */
-    private Set<LocalStorageDto> contracts;
+    private List<MultipartFile> contracts;
+    /** 项目书 */
+    private List<Long> contractsOld;
 
     /** 启动时间 */
     private Timestamp startTime;
@@ -92,6 +96,15 @@ public class ProjectPlanCreateForm implements Serializable {
     /** 投稿截止时间 */
     private Timestamp deadline;
 
-    /** 落地地区 */
-    private String landingArea;
+    /** 省 */
+    private String province;
+    /** 市 */
+    private String city;
+    /** 区/县 */
+    private String county;
+    /** 街道 */
+    private String street;
+    /** 社区 */
+    private String community;
+
 }

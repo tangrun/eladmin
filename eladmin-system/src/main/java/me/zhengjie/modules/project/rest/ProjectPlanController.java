@@ -16,8 +16,10 @@
 package me.zhengjie.modules.project.rest;
 
 import me.zhengjie.annotation.Log;
+import me.zhengjie.base.BaseEntity;
 import me.zhengjie.modules.project.domain.ProjectPlan;
 import me.zhengjie.modules.project.service.ProjectPlanService;
+import me.zhengjie.modules.project.service.dto.ProjectPlanCreateForm;
 import me.zhengjie.modules.project.service.dto.ProjectPlanQueryCriteria;
 import org.springframework.data.domain.Pageable;
 import lombok.RequiredArgsConstructor;
@@ -65,7 +67,7 @@ public class ProjectPlanController {
     @Log("新增projectPlan")
     @ApiOperation("新增projectPlan")
     @PreAuthorize("@el.check('projectPlan:add')")
-    public ResponseEntity<Object> createProjectPlan(@Validated @RequestBody ProjectPlan resources){
+    public ResponseEntity<Object> createProjectPlan( @RequestBody ProjectPlanCreateForm resources){
         projectPlanService.create(resources);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
@@ -74,7 +76,7 @@ public class ProjectPlanController {
     @Log("修改projectPlan")
     @ApiOperation("修改projectPlan")
     @PreAuthorize("@el.check('projectPlan:edit')")
-    public ResponseEntity<Object> updateProjectPlan(@Validated @RequestBody ProjectPlan resources){
+    public ResponseEntity<Object> updateProjectPlan( @RequestBody ProjectPlan resources){
         projectPlanService.update(resources);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }

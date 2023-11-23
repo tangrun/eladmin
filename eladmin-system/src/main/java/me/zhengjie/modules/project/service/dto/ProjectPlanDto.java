@@ -15,9 +15,15 @@
 */
 package me.zhengjie.modules.project.service.dto;
 
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import me.zhengjie.base.BaseDTO;
+import me.zhengjie.modules.project.domain.ProjectPlan;
+import me.zhengjie.modules.system.service.dto.UserDto;
+import me.zhengjie.modules.system.service.dto.UserSmallDto;
 import me.zhengjie.service.dto.LocalStorageDto;
 
+import javax.persistence.Column;
 import java.sql.Timestamp;
 import java.io.Serializable;
 import java.util.Set;
@@ -29,13 +35,13 @@ import java.util.Set;
 * @date 2023-11-15
 **/
 @Data
-public class ProjectPlanDto implements Serializable {
+public class ProjectPlanDto extends BaseDTO implements Serializable {
 
     /** 计划ID */
     private Long planId;
 
     /** 上级项目 */
-    private Long parentId;
+    private ProjectPlanDto parentId;
 
     /** 项目状态：0、储备；1、立项 */
     private String planStatus;
@@ -44,10 +50,10 @@ public class ProjectPlanDto implements Serializable {
     private String planName;
 
     /** 项目类别 */
-    private String categoryId;
+    private String category;
 
     /** 资金来源：专项资金、配套资金、支持资金 */
-    private String source;
+    private String sourceFund;
 
     /** 项目概述 */
     private String overview;
@@ -58,14 +64,8 @@ public class ProjectPlanDto implements Serializable {
     /** 项目公告 */
     private String notice;
 
-    /** 创建人 */
-    private String createBy;
-
-    /** 创建时间 */
-    private Timestamp createTime;
-
     /** 项目负责人 */
-    private Integer leaderId;
+    private UserSmallDto leader;
 
     /** 项目书 */
     private Set<LocalStorageDto> proposals;
@@ -96,4 +96,16 @@ public class ProjectPlanDto implements Serializable {
 
     /** 落地地区 */
     private String landingArea;
+
+    /** 省 */
+    private String province;
+    /** 市 */
+    private String city;
+    /** 区/县 */
+    private String county;
+    /** 街道 */
+    private String street;
+    /** 社区 */
+    private String community;
+
 }
