@@ -54,6 +54,11 @@ spring:
     port: 36379
     password: PFmXtwArZRFXT5DJ
     timeout: 5000
+  jpa:
+    hibernate:
+      ddl-auto: update
+    database: mysql
+    database-platform: org.hibernate.dialect.MySQL57Dialect
 # 登录相关配置
 login:
   #  是否限制单用户登录

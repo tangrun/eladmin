@@ -111,6 +111,15 @@ public class LoginProperties {
             int n1 = num(1, 10), n2 = num(1, 10);
             int opt = num(3);
 
+            if (opt == 1){
+                // 减法时避免负数
+                if (n1 < n2){
+                    int temp = n1;
+                    n1 = n2;
+                    n2 = temp;
+                }
+            }
+
             // 计算结果
             int res = new int[]{n1 + n2, n1 - n2, n1 * n2}[opt];
             // 转换为字符运算符

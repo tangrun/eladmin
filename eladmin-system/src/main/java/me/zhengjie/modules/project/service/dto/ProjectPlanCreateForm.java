@@ -16,10 +16,13 @@
 package me.zhengjie.modules.project.service.dto;
 
 import lombok.Data;
+import me.zhengjie.modules.system.domain.Dict;
+import me.zhengjie.modules.system.service.dto.DictDto;
+import me.zhengjie.modules.system.service.dto.DictSmallDto;
 import me.zhengjie.service.dto.LocalStorageDto;
 
-import java.sql.Timestamp;
 import java.io.Serializable;
+import java.sql.Timestamp;
 import java.util.Set;
 
 /**
@@ -29,25 +32,20 @@ import java.util.Set;
 * @date 2023-11-15
 **/
 @Data
-public class ProjectPlanDto implements Serializable {
+public class ProjectPlanCreateForm implements Serializable {
 
-    /** 计划ID */
-    private Long planId;
 
     /** 上级项目 */
     private Long parentId;
-
-    /** 项目状态：0、储备；1、立项 */
-    private String planStatus;
 
     /** 项目名称 */
     private String planName;
 
     /** 项目类别 */
-    private String categoryId;
+    private DictSmallDto categoryId;
 
     /** 资金来源：专项资金、配套资金、支持资金 */
-    private String source;
+    private DictSmallDto source;
 
     /** 项目概述 */
     private String overview;

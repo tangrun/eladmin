@@ -16,8 +16,10 @@
 package me.zhengjie.modules.project.service.mapstruct;
 
 import me.zhengjie.base.BaseMapper;
+import me.zhengjie.domain.LocalStorage;
 import me.zhengjie.modules.project.domain.ProjectPlan;
 import me.zhengjie.modules.project.service.dto.ProjectPlanDto;
+import me.zhengjie.service.mapstruct.LocalStorageMapper;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 
@@ -26,7 +28,7 @@ import org.mapstruct.ReportingPolicy;
 * @author hb
 * @date 2023-11-15
 **/
-@Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
+@Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE,uses = LocalStorageMapper.class)
 public interface ProjectPlanMapper extends BaseMapper<ProjectPlanDto, ProjectPlan> {
 
 }

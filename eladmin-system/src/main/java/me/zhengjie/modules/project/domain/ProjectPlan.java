@@ -23,9 +23,16 @@ import javax.persistence.*;
 import javax.validation.constraints.*;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+
+import me.zhengjie.base.BaseEntity;
+import me.zhengjie.domain.LocalStorage;
+import me.zhengjie.modules.system.domain.Dict;
+import me.zhengjie.modules.system.domain.User;
 import org.hibernate.annotations.*;
 import java.sql.Timestamp;
 import java.io.Serializable;
+import java.util.List;
+import java.util.Set;
 
 /**
 * @website https://eladmin.vip
@@ -36,33 +43,41 @@ import java.io.Serializable;
 @Entity
 @Data
 @Table(name="project_plan")
-public class ProjectPlan implements Serializable {
+public class ProjectPlan extends BaseEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "`plan_id`")
     @ApiModelProperty(value = "计划ID")
+    @Null(groups = Create.class)
     private Long planId;
 
-    @Column(name = "`parent_id`")
+    @OneToOne()
+    @JoinColumn(name = "parent_id",referencedColumnName = "plan_id")
     @ApiModelProperty(value = "上级项目")
-    private Long parentId;
+    private ProjectPlan parentId;
 
-    @Column(name = "`plan_status`")
+    @OneToOne()
+    @JoinColumn(name = "plan_status_id",referencedColumnName = "dict_id")
     @ApiModelProperty(value = "项目状态：0、储备；1、立项")
-    private String planStatus;
+    private Dict planStatus;
 
     @Column(name = "`plan_name`")
     @ApiModelProperty(value = "项目名称")
+    @NotBlank(groups = Create.class)
     private String planName;
 
-    @Column(name = "`category_id`")
+    @OneToOne()
+    @JoinColumn(name = "category_id",referencedColumnName = "dict_id")
     @ApiModelProperty(value = "项目类别")
-    private String categoryId;
+    @NotNull(groups = Create.class)
+    private Dict category;
 
-    @Column(name = "`source`")
+    @OneToOne()
+    @JoinColumn(name = "source_fund_id",referencedColumnName = "dict_id")
     @ApiModelProperty(value = "资金来源：专项资金、配套资金、支持资金")
-    private String source;
+    @NotNull(groups = Create.class)
+    private Dict sourceFund;
 
     @Column(name = "`overview`")
     @ApiModelProperty(value = "项目概述")
@@ -76,33 +91,30 @@ public class ProjectPlan implements Serializable {
     @ApiModelProperty(value = "项目公告")
     private String notice;
 
-    @Column(name = "`create_by`")
-    @ApiModelProperty(value = "创建人")
-    private String createBy;
-
-    @Column(name = "`create_time`")
-    @CreationTimestamp
-    @ApiModelProperty(value = "创建时间")
-    private Timestamp createTime;
-
-    @Column(name = "`leader_id`")
+    @OneToOne()
+    @JoinColumn(name = "leader_id",referencedColumnName = "user_id")
     @ApiModelProperty(value = "项目负责人")
-    private Integer leaderId;
+    @NotNull(groups = Create.class)
+    private User leader;
 
-    @Column(name = "`proposal`")
+    @ManyToMany()
+    @JoinColumn(name = "proposal_id",referencedColumnName = "storage_id")
     @ApiModelProperty(value = "项目书")
-    private String proposal;
+    private Set<LocalStorage> proposals;
 
-    @Column(name = "`contract`")
+    @ManyToMany()
+    @JoinColumn(name = "contract_id",referencedColumnName = "storage_id")
     @ApiModelProperty(value = "项目合同")
-    private String contract;
+    private Set<LocalStorage> contracts;
 
     @Column(name = "`start_time`")
     @ApiModelProperty(value = "启动时间")
+    @NotNull(groups = Create.class)
     private Timestamp startTime;
 
     @Column(name = "`end_time`")
     @ApiModelProperty(value = "结束时间")
+    @NotNull(groups = Create.class)
     private Timestamp endTime;
 
     @Column(name = "`contacts`")
@@ -125,9 +137,22 @@ public class ProjectPlan implements Serializable {
     @ApiModelProperty(value = "投稿截止时间")
     private Timestamp deadline;
 
-    @Column(name = "`landing_area`")
-    @ApiModelProperty(value = "落地地区")
-    private String landingArea;
+    @Column(name = "province")
+    @ApiModelProperty(value = "省")
+    private String province;
+    @Column(name = "city")
+    @ApiModelProperty(value = "市")
+    private String city;
+    @Column(name = "county")
+    @ApiModelProperty(value = "区/县")
+    private String county;
+    @Column(name = "street")
+    @ApiModelProperty(value = "街道")
+    private String street;
+    @Column(name = "community")
+    @ApiModelProperty(value = "社区")
+    private String community;
+
 
     public void copy(ProjectPlan source){
         BeanUtil.copyProperties(source,this, CopyOptions.create().setIgnoreNullValue(true));
