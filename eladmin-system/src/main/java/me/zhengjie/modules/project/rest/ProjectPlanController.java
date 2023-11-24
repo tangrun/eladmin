@@ -17,10 +17,14 @@ package me.zhengjie.modules.project.rest;
 
 import me.zhengjie.annotation.Log;
 import me.zhengjie.base.BaseEntity;
+import me.zhengjie.domain.LocalStorage;
 import me.zhengjie.modules.project.domain.ProjectPlan;
 import me.zhengjie.modules.project.service.ProjectPlanService;
 import me.zhengjie.modules.project.service.dto.ProjectPlanCreateForm;
 import me.zhengjie.modules.project.service.dto.ProjectPlanQueryCriteria;
+import me.zhengjie.service.LocalStorageService;
+import me.zhengjie.service.dto.LocalStorageDto;
+import me.zhengjie.service.mapstruct.LocalStorageMapper;
 import org.springframework.data.domain.Pageable;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -30,9 +34,11 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import io.swagger.annotations.*;
 import java.io.IOException;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import me.zhengjie.utils.PageResult;
 import me.zhengjie.modules.project.service.dto.ProjectPlanDto;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
 * @website https://eladmin.vip
@@ -46,6 +52,18 @@ import me.zhengjie.modules.project.service.dto.ProjectPlanDto;
 public class ProjectPlanController {
 
     private final ProjectPlanService projectPlanService;
+    private final LocalStorageService localStorageService;
+    private final LocalStorageMapper localStorageMapper;
+
+    @Log("项目计划上传文件")
+    @ApiOperation("项目计划上传文件")
+    @PostMapping(value = "/upload")
+    @PreAuthorize("@el.check('projectPlan:add','projectPlan:edit')")
+    public ResponseEntity<LocalStorageDto> upload(@RequestBody MultipartFile file, HttpServletRequest request)throws Exception{
+        LocalStorage localStorage = localStorageService.create(null, file);
+        LocalStorageDto localStorageDto = localStorageMapper.toDto(localStorage);
+        return new ResponseEntity<>(localStorageDto,HttpStatus.CREATED);
+    }
 
     @Log("导出数据")
     @ApiOperation("导出数据")
@@ -67,7 +85,7 @@ public class ProjectPlanController {
     @Log("新增projectPlan")
     @ApiOperation("新增projectPlan")
     @PreAuthorize("@el.check('projectPlan:add')")
-    public ResponseEntity<Object> createProjectPlan( @RequestBody ProjectPlanCreateForm resources){
+    public ResponseEntity<Object> createProjectPlan(@RequestBody ProjectPlanCreateForm resources){
         projectPlanService.create(resources);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }

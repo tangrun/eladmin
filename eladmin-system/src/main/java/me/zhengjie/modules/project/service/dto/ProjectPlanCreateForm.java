@@ -66,14 +66,10 @@ public class ProjectPlanCreateForm implements Serializable {
     private Long leader;
 
     /** 项目书 */
-    private List<MultipartFile> proposals;
-    /** 项目书  */
-    private List<Long> proposalsOld;
+    private List<Long> proposals;
 
     /** 项目合同 */
-    private List<MultipartFile> contracts;
-    /** 项目书 */
-    private List<Long> contractsOld;
+    private List<Long> contracts;
 
     /** 启动时间 */
     private Timestamp startTime;

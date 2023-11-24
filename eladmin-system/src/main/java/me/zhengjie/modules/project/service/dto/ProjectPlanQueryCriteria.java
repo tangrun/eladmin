@@ -15,9 +15,12 @@
 */
 package me.zhengjie.modules.project.service.dto;
 
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import java.util.List;
 import me.zhengjie.annotation.Query;
+
+import javax.persistence.Column;
 
 /**
 * @website https://eladmin.vip
@@ -26,4 +29,17 @@ import me.zhengjie.annotation.Query;
 **/
 @Data
 public class ProjectPlanQueryCriteria{
+
+    @Query(blurry = "planName")
+    private String blurry;
+    @Query()
+    private String category;
+    @Query()
+    private String province;
+    @Query()
+    private String city;
+    @Query()
+    private String county;
+    @Query()
+    private String street;
 }

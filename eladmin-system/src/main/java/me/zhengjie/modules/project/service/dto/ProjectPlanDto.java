@@ -41,7 +41,7 @@ public class ProjectPlanDto extends BaseDTO implements Serializable {
     private Long planId;
 
     /** 上级项目 */
-    private ProjectPlanDto parentId;
+    private ProjectPlanDto parent;
 
     /** 项目状态：0、储备；1、立项 */
     private String planStatus;

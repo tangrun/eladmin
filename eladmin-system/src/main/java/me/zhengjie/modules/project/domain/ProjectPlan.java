@@ -55,7 +55,7 @@ public class ProjectPlan extends BaseEntity implements Serializable {
     @OneToOne()
     @JoinColumn(name = "parent_id",referencedColumnName = "plan_id")
     @ApiModelProperty(value = "上级项目")
-    private ProjectPlan parentId;
+    private ProjectPlan parent;
 
     @Column(name = "plan_status")
     @ApiModelProperty(value = "项目状态：0、储备；1、立项")
