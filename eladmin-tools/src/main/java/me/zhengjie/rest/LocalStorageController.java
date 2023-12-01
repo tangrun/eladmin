@@ -65,7 +65,7 @@ public class LocalStorageController {
     @ApiOperation("上传文件")
     @PreAuthorize("@el.check('storage:add')")
     public ResponseEntity<Object> createFile(@RequestParam String name, @RequestParam("file") MultipartFile file){
-        localStorageService.create(name, file);
+        localStorageService.create("default", file);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
@@ -77,7 +77,7 @@ public class LocalStorageController {
         if(!FileUtil.IMAGE.equals(FileUtil.getFileType(suffix))){
             throw new BadRequestException("只能上传图片");
         }
-        LocalStorage localStorage = localStorageService.create(null, file);
+        LocalStorage localStorage = localStorageService.create("image", file);
         return new ResponseEntity<>(localStorage, HttpStatus.OK);
     }
 

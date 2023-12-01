@@ -78,20 +78,6 @@ public class UserController {
         userService.download(userService.queryAll(criteria), response);
     }
 
-    @ApiOperation("查询顶级部门下的用户")
-    @GetMapping("deptUsers")
-    @PreAuthorize("@el.check('user:deptList','projectPlan:add')")
-    public ResponseEntity<PageResult<UserDto>> queryDeptUser(UserQueryCriteria criteria){
-        UserDto userDto = userService.findById(SecurityUtils.getCurrentUserId());
-        DeptDto deptDto = deptService.findById(userDto.getDept().getId());
-        while (deptDto.getPid() != null){
-            deptDto = deptService.findById(deptDto.getPid());
-        }
-        criteria.getDeptIds().clear();
-        criteria.getDeptIds().add(deptDto.getId());
-        return new ResponseEntity<>(userService.queryAll(criteria,Pageable.unpaged()),HttpStatus.OK);
-    }
-
     @ApiOperation("查询用户")
     @GetMapping
     @PreAuthorize("@el.check('user:list')")

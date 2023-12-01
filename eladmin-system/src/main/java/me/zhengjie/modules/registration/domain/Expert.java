@@ -1,9 +1,11 @@
 package me.zhengjie.modules.registration.domain;
 
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.Setter;
 import me.zhengjie.base.BaseEntity;
 import me.zhengjie.domain.LocalStorage;
+import me.zhengjie.modules.system.domain.Dept;
 
 import javax.persistence.*;
 
@@ -22,6 +24,11 @@ public class Expert extends BaseEntity {
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @OneToOne
+    @JoinColumn(name = "dept_id")
+    @ApiModelProperty(value = "部门")
+    private Dept dept;
 
     /**
      * 姓名

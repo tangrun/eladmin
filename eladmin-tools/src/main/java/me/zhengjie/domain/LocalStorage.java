@@ -20,18 +20,21 @@ import lombok.*;
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.bean.copier.CopyOptions;
 import me.zhengjie.base.BaseEntity;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
 /**
-* @author Zheng Jie
-* @date 2019-09-05
-*/
+ * @author Zheng Jie
+ * @date 2019-09-05
+ */
 @Getter
 @Setter
 @Entity
-@Table(name="tool_local_storage")
+@Table(name = "tool_local_storage")
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class LocalStorage extends BaseEntity implements Serializable {
 
     @Id
@@ -52,22 +55,26 @@ public class LocalStorage extends BaseEntity implements Serializable {
     @ApiModelProperty(value = "路径")
     private String path;
 
-    @ApiModelProperty(value = "类型")
-    private String type;
+    @ApiModelProperty(value = "文件类型")
+    private String fileType;
 
     @ApiModelProperty(value = "大小")
     private String size;
 
-    public LocalStorage(String realName,String name, String suffix, String path, String type, String size) {
+    @ApiModelProperty(value = "业务类型")
+    private String type;
+
+    public LocalStorage(String realName, String name, String suffix, String path, String fileType, String size, String type) {
         this.realName = realName;
         this.name = name;
         this.suffix = suffix;
         this.path = path;
-        this.type = type;
+        this.fileType = fileType;
         this.size = size;
+        this.type = type;
     }
 
-    public void copy(LocalStorage source){
-        BeanUtil.copyProperties(source,this, CopyOptions.create().setIgnoreNullValue(true));
+    public void copy(LocalStorage source) {
+        BeanUtil.copyProperties(source, this, CopyOptions.create().setIgnoreNullValue(true));
     }
 }

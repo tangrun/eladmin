@@ -23,10 +23,12 @@ import me.zhengjie.exception.BadRequestException;
 import me.zhengjie.utils.enums.DataScopeEnum;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * 获取当前登录的用户
@@ -35,6 +37,10 @@ import java.util.List;
  */
 @Slf4j
 public class SecurityUtils {
+
+    public static List<String> getCurrentUserPermission(){
+        return SecurityUtils.getCurrentUser().getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList());
+    }
 
     /**
      * 获取当前登录的用户

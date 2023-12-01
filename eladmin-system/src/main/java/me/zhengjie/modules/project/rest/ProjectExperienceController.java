@@ -40,7 +40,7 @@ import me.zhengjie.modules.project.service.dto.ProjectExperienceDto;
 @RestController
 @RequiredArgsConstructor
 @Api(tags = "项目经验管理")
-@RequestMapping("/api/projectExperience")
+@RequestMapping("/api/project/experience")
 public class ProjectExperienceController {
 
     private final ProjectExperienceService projectExperienceService;
@@ -48,7 +48,7 @@ public class ProjectExperienceController {
     @Log("导出数据")
     @ApiOperation("导出数据")
     @GetMapping(value = "/download")
-    @PreAuthorize("@el.check('projectExperience:list')")
+    @PreAuthorize("@el.check('project:experience:list')")
     public void exportProjectExperience(HttpServletResponse response, ProjectExperienceQueryCriteria criteria) throws IOException {
         projectExperienceService.download(projectExperienceService.queryAll(criteria), response);
     }
@@ -56,7 +56,7 @@ public class ProjectExperienceController {
     @GetMapping
     @Log("查询项目经验")
     @ApiOperation("查询项目经验")
-    @PreAuthorize("@el.check('projectExperience:list')")
+    @PreAuthorize("@el.check('project:experience:list')")
     public ResponseEntity<PageResult<ProjectExperienceDto>> queryProjectExperience(ProjectExperienceQueryCriteria criteria, Pageable pageable){
         return new ResponseEntity<>(projectExperienceService.queryAll(criteria,pageable),HttpStatus.OK);
     }
@@ -64,7 +64,7 @@ public class ProjectExperienceController {
     @PostMapping
     @Log("新增项目经验")
     @ApiOperation("新增项目经验")
-    @PreAuthorize("@el.check('projectExperience:add')")
+    @PreAuthorize("@el.check('project:experience:add')")
     public ResponseEntity<Object> createProjectExperience(@Validated @RequestBody ProjectExperience resources){
         projectExperienceService.create(resources);
         return new ResponseEntity<>(HttpStatus.CREATED);
@@ -73,7 +73,7 @@ public class ProjectExperienceController {
     @PutMapping
     @Log("修改项目经验")
     @ApiOperation("修改项目经验")
-    @PreAuthorize("@el.check('projectExperience:edit')")
+    @PreAuthorize("@el.check('project:experience:edit')")
     public ResponseEntity<Object> updateProjectExperience(@Validated @RequestBody ProjectExperience resources){
         projectExperienceService.update(resources);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -82,7 +82,7 @@ public class ProjectExperienceController {
     @DeleteMapping
     @Log("删除项目经验")
     @ApiOperation("删除项目经验")
-    @PreAuthorize("@el.check('projectExperience:del')")
+    @PreAuthorize("@el.check('project:experience:del')")
     public ResponseEntity<Object> deleteProjectExperience(@RequestBody Long[] ids) {
         projectExperienceService.deleteAll(ids);
         return new ResponseEntity<>(HttpStatus.OK);

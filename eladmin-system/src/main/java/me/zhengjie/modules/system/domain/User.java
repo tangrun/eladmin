@@ -16,8 +16,7 @@
 package me.zhengjie.modules.system.domain;
 
 import io.swagger.annotations.ApiModelProperty;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import me.zhengjie.base.BaseEntity;
 import me.zhengjie.modules.registration.domain.CompetentOrganization;
 import me.zhengjie.modules.registration.domain.Expert;
@@ -40,6 +39,9 @@ import java.util.Set;
 @Getter
 @Setter
 @Table(name="sys_user")
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class User extends BaseEntity implements Serializable {
 
     @Id
@@ -108,25 +110,6 @@ public class User extends BaseEntity implements Serializable {
     @Column(name = "pwd_reset_time")
     @ApiModelProperty(value = "最后修改密码的时间", hidden = true)
     private Date pwdResetTime;
-
-    @Column(name = "user_type")
-    @ApiModelProperty(value = "账号类型 1主管单位 2组织机构 3评审专家", hidden = true)
-    private Integer userType;
-
-    @OneToOne
-    @JoinColumn(name = "competent_organ_id")
-    @ApiModelProperty(value = "主管单位")
-    private CompetentOrganization competentOrganization;
-
-    @OneToOne
-    @JoinColumn(name = "social_organ_id")
-    @ApiModelProperty(value = "组织机构")
-    private SocialOrganization socialOrganization;
-
-    @OneToOne
-    @JoinColumn(name = "expert_id")
-    @ApiModelProperty(value = "评审专家")
-    private Expert expert;
 
     @Override
     public boolean equals(Object o) {

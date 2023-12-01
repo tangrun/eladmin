@@ -40,7 +40,7 @@ import me.zhengjie.modules.project.service.dto.ProjectSuperviseDto;
 @RestController
 @RequiredArgsConstructor
 @Api(tags = "project管理")
-@RequestMapping("/api/projectSupervise")
+@RequestMapping("/api/project/supervise")
 public class ProjectSuperviseController {
 
     private final ProjectSuperviseService projectSuperviseService;
@@ -48,7 +48,7 @@ public class ProjectSuperviseController {
     @Log("导出数据")
     @ApiOperation("导出数据")
     @GetMapping(value = "/download")
-    @PreAuthorize("@el.check('projectSupervise:list')")
+    @PreAuthorize("@el.check('project:supervise:list')")
     public void exportProjectSupervise(HttpServletResponse response, ProjectSuperviseQueryCriteria criteria) throws IOException {
         projectSuperviseService.download(projectSuperviseService.queryAll(criteria), response);
     }
@@ -56,7 +56,7 @@ public class ProjectSuperviseController {
     @GetMapping
     @Log("查询project")
     @ApiOperation("查询project")
-    @PreAuthorize("@el.check('projectSupervise:list')")
+    @PreAuthorize("@el.check('project:supervise:list')")
     public ResponseEntity<PageResult<ProjectSuperviseDto>> queryProjectSupervise(ProjectSuperviseQueryCriteria criteria, Pageable pageable){
         return new ResponseEntity<>(projectSuperviseService.queryAll(criteria,pageable),HttpStatus.OK);
     }
@@ -64,7 +64,7 @@ public class ProjectSuperviseController {
     @PostMapping
     @Log("新增project")
     @ApiOperation("新增project")
-    @PreAuthorize("@el.check('projectSupervise:add')")
+    @PreAuthorize("@el.check('project:supervise:add')")
     public ResponseEntity<Object> createProjectSupervise(@Validated @RequestBody ProjectSupervise resources){
         projectSuperviseService.create(resources);
         return new ResponseEntity<>(HttpStatus.CREATED);
@@ -73,7 +73,7 @@ public class ProjectSuperviseController {
     @PutMapping
     @Log("修改project")
     @ApiOperation("修改project")
-    @PreAuthorize("@el.check('projectSupervise:edit')")
+    @PreAuthorize("@el.check('project:supervise:edit')")
     public ResponseEntity<Object> updateProjectSupervise(@Validated @RequestBody ProjectSupervise resources){
         projectSuperviseService.update(resources);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -82,7 +82,7 @@ public class ProjectSuperviseController {
     @DeleteMapping
     @Log("删除project")
     @ApiOperation("删除project")
-    @PreAuthorize("@el.check('projectSupervise:del')")
+    @PreAuthorize("@el.check('project:supervise:del')")
     public ResponseEntity<Object> deleteProjectSupervise(@RequestBody Long[] ids) {
         projectSuperviseService.deleteAll(ids);
         return new ResponseEntity<>(HttpStatus.OK);

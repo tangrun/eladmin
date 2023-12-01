@@ -4,6 +4,6 @@
 */target/*
 */*.iml
 /.gradle/
-/application.pid
+/projectApplication.pid
 .svn/
 eladmin/

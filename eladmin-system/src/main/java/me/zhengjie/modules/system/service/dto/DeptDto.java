@@ -15,9 +15,12 @@
  */
 package me.zhengjie.modules.system.service.dto;
 
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.Setter;
 import me.zhengjie.base.BaseDTO;
+import me.zhengjie.modules.system.enums.DeptType;
+
 import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
@@ -43,6 +46,10 @@ public class DeptDto extends BaseDTO implements Serializable {
     private Long pid;
 
     private Integer subCount;
+
+    private DeptType deptType;
+
+    private Boolean top;
 
     public Boolean getHasChildren() {
         return subCount > 0;

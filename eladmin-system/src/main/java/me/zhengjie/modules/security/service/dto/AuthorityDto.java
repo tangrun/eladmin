@@ -20,6 +20,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 
+import java.util.Objects;
+
 /**
  * 避免序列化问题
  * @author Zheng Jie
@@ -31,4 +33,13 @@ import org.springframework.security.core.GrantedAuthority;
 public class AuthorityDto implements GrantedAuthority {
 
     private String authority;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        AuthorityDto that = (AuthorityDto) o;
+        return Objects.equals(authority, that.authority);
+    }
+
 }

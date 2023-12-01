@@ -40,7 +40,7 @@ import me.zhengjie.modules.project.service.dto.ProjectSelfDto;
 @RestController
 @RequiredArgsConstructor
 @Api(tags = "project管理")
-@RequestMapping("/api/projectSelf")
+@RequestMapping("/api/project/self")
 public class ProjectSelfController {
 
     private final ProjectSelfService projectSelfService;
@@ -48,7 +48,7 @@ public class ProjectSelfController {
     @Log("导出数据")
     @ApiOperation("导出数据")
     @GetMapping(value = "/download")
-    @PreAuthorize("@el.check('projectSelf:list')")
+    @PreAuthorize("@el.check('project:self:list')")
     public void exportProjectSelf(HttpServletResponse response, ProjectSelfQueryCriteria criteria) throws IOException {
         projectSelfService.download(projectSelfService.queryAll(criteria), response);
     }
@@ -56,7 +56,7 @@ public class ProjectSelfController {
     @GetMapping
     @Log("查询project")
     @ApiOperation("查询project")
-    @PreAuthorize("@el.check('projectSelf:list')")
+    @PreAuthorize("@el.check('project:self:list')")
     public ResponseEntity<PageResult<ProjectSelfDto>> queryProjectSelf(ProjectSelfQueryCriteria criteria, Pageable pageable){
         return new ResponseEntity<>(projectSelfService.queryAll(criteria,pageable),HttpStatus.OK);
     }
@@ -64,7 +64,7 @@ public class ProjectSelfController {
     @PostMapping
     @Log("新增project")
     @ApiOperation("新增project")
-    @PreAuthorize("@el.check('projectSelf:add')")
+    @PreAuthorize("@el.check('project:self:add')")
     public ResponseEntity<Object> createProjectSelf(@Validated @RequestBody ProjectSelf resources){
         projectSelfService.create(resources);
         return new ResponseEntity<>(HttpStatus.CREATED);
@@ -73,7 +73,7 @@ public class ProjectSelfController {
     @PutMapping
     @Log("修改project")
     @ApiOperation("修改project")
-    @PreAuthorize("@el.check('projectSelf:edit')")
+    @PreAuthorize("@el.check('project:self:edit')")
     public ResponseEntity<Object> updateProjectSelf(@Validated @RequestBody ProjectSelf resources){
         projectSelfService.update(resources);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -82,7 +82,7 @@ public class ProjectSelfController {
     @DeleteMapping
     @Log("删除project")
     @ApiOperation("删除project")
-    @PreAuthorize("@el.check('projectSelf:del')")
+    @PreAuthorize("@el.check('project:self:del')")
     public ResponseEntity<Object> deleteProjectSelf(@RequestBody Long[] ids) {
         projectSelfService.deleteAll(ids);
         return new ResponseEntity<>(HttpStatus.OK);

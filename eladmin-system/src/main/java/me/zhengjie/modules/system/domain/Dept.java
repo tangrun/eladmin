@@ -20,6 +20,8 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.Setter;
 import me.zhengjie.base.BaseEntity;
+import me.zhengjie.modules.system.enums.DeptType;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -65,6 +67,17 @@ public class Dept extends BaseEntity implements Serializable {
 
     @ApiModelProperty(value = "子节点数目", hidden = true)
     private Integer subCount = 0;
+
+    /**
+     * 可以做成每一级都有 但是修改部门的时候需要修改下面每一级的部门
+     * 所以先只在最顶上的部门维护
+     */
+    @ApiModelProperty(value = "节点类型", hidden = true)
+    @Enumerated(EnumType.STRING)
+    private DeptType deptType;
+
+    @ApiModelProperty(value = "顶级部门", hidden = true)
+    private Boolean top;
 
     @Override
     public boolean equals(Object o) {

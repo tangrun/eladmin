@@ -15,6 +15,8 @@
  */
 package me.zhengjie.service.dto;
 
+import com.alibaba.fastjson.annotation.JSONField;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.Setter;
 import me.zhengjie.base.BaseDTO;
@@ -28,15 +30,30 @@ import java.io.Serializable;
 @Setter
 public class LocalStorageDto extends BaseDTO implements Serializable {
 
+    @ApiModelProperty(name = "上传文件ID")
     private Long id;
 
+    @ApiModelProperty(hidden = true)
+    @JSONField(deserialize = false)
     private String realName;
 
+    @ApiModelProperty(hidden = true)
+    @JSONField(deserialize = false)
     private String name;
 
+    @ApiModelProperty(hidden = true)
+    @JSONField(deserialize = false)
     private String suffix;
 
+    @ApiModelProperty(hidden = true)
+    @JSONField(deserialize = false)
+    private String fileType;
+
+    @ApiModelProperty(hidden = true)
+    @JSONField(deserialize = false)
     private String type;
 
+    @ApiModelProperty(hidden = true)
+    @JSONField(deserialize = false)
     private String size;
 }
